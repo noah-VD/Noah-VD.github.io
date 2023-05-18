@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TCaP hangout: Pg 5</title>
+    <link rel="icon" type="image" href="./img/200lbhorse.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+      td {
+        border: 1px solid black;
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        font-size: 50px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="index.html" title="page 1">Home</a>
+    <a href="pg4.html" title="page 2">page 2</a>
+    <a href="pg2.html" title="page 3">page 3</a>
+    <a href="pg3.html" title="page 4">page 4</a>
+    <a href="pg4.html" title="page 5">page 5</a>
+
+    <h1>Tic Tac Toe</h1>
+    <table>
+      <tr>
+        <td id="cell00" onclick="play(0, 0)"></td>
+        <td id="cell01" onclick="play(0, 1)"></td>
+        <td id="cell02" onclick="play(0, 2)"></td>
+      </tr>
+      <tr>
+        <td id="cell10" onclick="play(1, 0)"></td>
+        <td id="cell11" onclick="play(1, 1)"></td>
+        <td id="cell12" onclick="play(1, 2)"></td>
+      </tr>
+      <tr>
+        <td id="cell20" onclick="play(2, 0)"></td>
+        <td id="cell21" onclick="play(2, 1)"></td>
+        <td id="cell22" onclick="play(2, 2)"></td>
+      </tr>
+    </table>
+    <br>
+    <button onclick="reset()">Reset</button>
+
+    <script>
+      // Initialize variables
+      let currentPlayer = "X";
+      let board = [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+      ];
+
+      // Function to update the board and check for a winner
+      function play(row, col) {
+        // If the cell is already filled or there is a winner, return
+        if (board[row][col] !== "" || checkWin()) {
+          return;
+        }
+
+        // Update the board and the cell content
+        board[row][col] = currentPlayer;
+        document.getElementById(`cell${row}${col}`).textContent = currentPlayer;
+
+        // Check for a winner
+        if (checkWin()) {
+          setTimeout(function() {
+            alert(`Player ${currentPlayer} wins!`);
+          }, 0);
+          return;
+        }
+
+        // Check for a draw
+        if (checkDraw()) {
+          setTimeout(function() {
+            alert("It's a draw!");
+          }, 0);
+          return;
+        }
+
+        // Switch players
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+      }
+
+      // Function to check if there is a winner
+      function checkWin() {
+        // Check rows
+        for (let i = 0; i < 3; i++) {
+          if (board[i][0] !== "" && board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
+            return true;
+          }
+        }
+
+        // Check columns
+        for (let j = 0; j < 3; j++) {
+          if (board[0][j] !== "" && board[0][j] === board[1][j] && board[1][j] === board[2][j]) {
+            return true;
+          }
+        }
+
+        // Check diagonals
+        if (board[0][0] !== "" && board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+          return true;
+        }
+        if (board[0][2] !== "" && board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+          return true;
+        }
+
+        return false;
+      }
+
+      // Function to check if the game is a draw
+      function checkDraw() {
+        for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+            if (board[i][j] === "") {
+              return false;
+            }
+          }
+        }
+        return true;
+      }
+
+      // Function to reset the game
+      function reset() {
+        currentPlayer = "X";
+        board = [
+          ["", "", ""],
+          ["", "", ""],
+          ["", "", ""]
+        ];
+        clearBoard();
+      }
+
+      // Function to clear the board
+      function clearBoard() {
+        const cells = document.getElementsByTagName("td");
+        for (let i = 0; i < cells.length; i++) {
+          cells[i].textContent = "";
+        }
+      }
+    </script>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <a href="./sub_folder/whyareuhere.html" title="secrets?">why</a>
+  </body>
+</html>
