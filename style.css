@@ -1,0 +1,14 @@
+
+body {
+    background-color: rgb(128, 187, 197);
+}
+body a {
+    text-decoration: none;
+    color: rgba(0, 24, 241, 0.801);
+    font-size: 40px;
+    padding-right: 20px;
+}
+body li {
+    font-size: 25px;
+    color: rgb(91, 26, 155);
+}
